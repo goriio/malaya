@@ -57,26 +57,15 @@ const Button = styled.button`
 `;
 
 export function PostForm({ onSubmit, submitLabel }) {
-  const [author, setAuthor] = useState();
+  const [author, setAuthor] = useState('');
   const [content, setContent] = useState('');
-
-  const handleAuthorChange = (event) => {
-    const { value } = event.target;
-    if (!value) return setAuthor(undefined);
-
-    setAuthor(value);
-  };
-
-  const handleContentChange = (event) => {
-    setContent(event.target.value);
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    onSubmit({ author: author?.trim(), content: content.trim() });
+    onSubmit({ author: author?.trim() || undefined, content: content.trim() });
 
-    setAuthor(undefined);
+    setAuthor('');
     setContent('');
   };
 
@@ -85,7 +74,7 @@ export function PostForm({ onSubmit, submitLabel }) {
       <InputWrapper>
         <TextInput
           value={author}
-          onChange={handleAuthorChange}
+          onChange={(event) => setAuthor(event.target.value)}
           placeholder="Name (Optional)"
           aria-label="Name"
         />
@@ -93,7 +82,7 @@ export function PostForm({ onSubmit, submitLabel }) {
       <InputWrapper>
         <TextArea
           value={content}
-          onChange={handleContentChange}
+          onChange={(event) => setContent(event.target.value)}
           placeholder="Your message here"
           aria-label="message"
           required
