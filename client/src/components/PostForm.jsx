@@ -57,15 +57,15 @@ const Button = styled.button`
 `;
 
 export function PostForm({ onSubmit, submitLabel }) {
-  const [author, setAuthor] = useState('');
+  const [author, setAuthor] = useState(localStorage.getItem('author') || '');
   const [content, setContent] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     onSubmit({ author: author?.trim() || undefined, content: content.trim() });
-
-    setAuthor('');
+    author
+      ? localStorage.setItem('author', author.trim())
+      : localStorage.removeItem('author');
     setContent('');
   };
 
