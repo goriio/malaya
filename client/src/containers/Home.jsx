@@ -9,7 +9,7 @@ export function Home() {
 
   const getPosts = async () => {
     const posts = await api.get('/posts');
-    setPosts(posts.data.sort((a, b) => b - a));
+    setPosts(posts.data.reverse());
   };
 
   useEffect(() => {
