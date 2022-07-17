@@ -25,7 +25,7 @@ export function PostDetails() {
       comments: [comment, ...post.comments],
     });
     setNewComment(comment);
-    setPost({ ...post, comments: [comment, ...post.comments] });
+    setPost({ ...post, comments: [...post.comments, comment] });
   };
 
   if (!post) return <div>Loading...</div>;
@@ -35,9 +35,9 @@ export function PostDetails() {
       <Post post={post} />
       <PostForm onSubmit={addComment} submitLabel="Comment" />
       {post.comments &&
-        post.comments.map((comment) => (
-          <Post key={comment._id} post={comment} />
-        ))}
+        post.comments
+          .map((comment) => <Post key={comment._id} post={comment} />)
+          .reverse()}
     </>
   );
 }
