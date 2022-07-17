@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { PostForm } from '../components/PostForm';
 import { Post } from '../components/Post';
 import { api } from '../lib/axios';
+import { Spinner } from '../components/Spinner';
 
 export function Home() {
   const [posts, setPosts] = useState(null);
@@ -25,7 +26,6 @@ export function Home() {
   return (
     <>
       <PostForm onSubmit={addPost} submitLabel="Post" />
-
       <h2>Posts</h2>
       {posts ? (
         posts.length ? (
@@ -34,7 +34,7 @@ export function Home() {
           <div>No content</div>
         )
       ) : (
-        <div>Loading...</div>
+        <Spinner />
       )}
     </>
   );

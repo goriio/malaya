@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Post } from '../components/Post';
 import { PostForm } from '../components/PostForm';
+import { Spinner } from '../components/Spinner';
 import { api } from '../lib/axios';
 
 export function PostDetails() {
@@ -28,7 +29,7 @@ export function PostDetails() {
     setPost({ ...post, comments: [...post.comments, comment] });
   };
 
-  if (!post) return <div>Loading...</div>;
+  if (!post) return <Spinner />;
 
   return (
     <>
